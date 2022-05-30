@@ -18,6 +18,7 @@
 		94703B512844E018004AAE42 /* BeerListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94703B502844E018004AAE42 /* BeerListVC.swift */; };
 		94703B532844E024004AAE42 /* BeerSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94703B522844E024004AAE42 /* BeerSearchVC.swift */; };
 		94703B552844E030004AAE42 /* RandomBeerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94703B542844E030004AAE42 /* RandomBeerVC.swift */; };
+		94703B5828450AC9004AAE42 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94703B5728450AC9004AAE42 /* BaseVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		94703B502844E018004AAE42 /* BeerListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListVC.swift; sourceTree = "<group>"; };
 		94703B522844E024004AAE42 /* BeerSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerSearchVC.swift; sourceTree = "<group>"; };
 		94703B542844E030004AAE42 /* RandomBeerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomBeerVC.swift; sourceTree = "<group>"; };
+		94703B5728450AC9004AAE42 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 		94703B152844DF04004AAE42 /* BBB */ = {
 			isa = PBXGroup;
 			children = (
+				94703B5628450AC2004AAE42 /* Base */,
 				94703B462844DF17004AAE42 /* App */,
 				94703B482844DF69004AAE42 /* Source */,
 				94703B472844DF2A004AAE42 /* Resource */,
@@ -171,6 +174,14 @@
 				94703B4C2844DFC8004AAE42 /* TabBarVC.swift */,
 			);
 			path = TabBar;
+			sourceTree = "<group>";
+		};
+		94703B5628450AC2004AAE42 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				94703B5728450AC9004AAE42 /* BaseVC.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -308,6 +319,7 @@
 				94703B4D2844DFC8004AAE42 /* TabBarVC.swift in Sources */,
 				94703B512844E018004AAE42 /* BeerListVC.swift in Sources */,
 				94703B192844DF04004AAE42 /* SceneDelegate.swift in Sources */,
+				94703B5828450AC9004AAE42 /* BaseVC.swift in Sources */,
 				94703B532844E024004AAE42 /* BeerSearchVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
