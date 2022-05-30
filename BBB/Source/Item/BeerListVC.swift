@@ -11,6 +11,6 @@ import UIKit
 class BeerListVC: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "BeerList"
+        view.backgroundColor = .blue
     }
 }

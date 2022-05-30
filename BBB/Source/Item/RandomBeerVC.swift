@@ -11,6 +11,6 @@ import UIKit
 class RandomBeerVC: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "RandomBeerVC"
+        view.backgroundColor = .yellow
     }
 }

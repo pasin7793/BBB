@@ -103,9 +103,9 @@
 		94703B152844DF04004AAE42 /* BBB */ = {
 			isa = PBXGroup;
 			children = (
+				94703B462844DF17004AAE42 /* App */,
 				94703B482844DF69004AAE42 /* Source */,
 				94703B472844DF2A004AAE42 /* Resource */,
-				94703B462844DF17004AAE42 /* App */,
 			);
 			path = BBB;
 			sourceTree = "<group>";

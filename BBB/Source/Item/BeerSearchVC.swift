@@ -11,6 +11,6 @@ import UIKit
 class BeerSearchVC: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "BeerSearch"
+        view.backgroundColor = .red
     }
 }
