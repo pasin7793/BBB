@@ -14,7 +14,7 @@ final class TabBarVC: UITabBarController{
         
         vc2.tabBarItem = UITabBarItem(title: "BeerSearch", image: UIImage(systemName: "2.circle.fill"), selectedImage: UIImage(systemName: "2.circle.fill"))
         
-        vc3.tabBarItem = UITabBarItem(title: "Random", image: UIImage(systemName: "3.circle.fill"), selectedImage: UIImage(systemName: "3.circle.fill"))
+        vc3.tabBarItem = UITabBarItem(title: "RandomBeer", image: UIImage(systemName: "3.circle.fill"), selectedImage: UIImage(systemName: "3.circle.fill"))
         self.viewControllers = [vc1,vc2,vc3]
     }
 }

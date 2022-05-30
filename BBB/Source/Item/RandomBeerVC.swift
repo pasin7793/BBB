@@ -2,7 +2,7 @@
 import Foundation
 import UIKit
 
-final class RandomBeerVC: UIViewController{
+final class RandomBeerVC: BaseVC{
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .yellow

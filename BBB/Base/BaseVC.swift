@@ -8,11 +8,18 @@
 import Foundation
 import UIKit
 
-final class BaseVC: UIViewController{
+class BaseVC: UIViewController{
     
     override func viewDidLoad() {
-        <#code#>
+        super.viewDidLoad()
+        setUp()
+        configureVC()
+        addView()
+        setLayout()
     }
     func setUp(){}
-    func 
+    func configureVC(){}
+    func addView(){}
+    func setLayout(){}
+    
 }
