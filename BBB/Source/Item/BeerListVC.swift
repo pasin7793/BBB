@@ -12,6 +12,8 @@ final class BeerListVC: BaseVC{
         $0.textColor = .black
         $0.textAlignment = .center
     }
+    
+    private let imageView = UIImageView()
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
