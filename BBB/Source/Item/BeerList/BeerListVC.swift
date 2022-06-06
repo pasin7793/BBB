@@ -15,10 +15,11 @@ final class BeerListVC: BaseVC,UITableViewDataSource, UITableViewDelegate{
     }
     
     private let tableView = UITableView().then{
-        $0.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        $0.register(BeerCell.self, forCellReuseIdentifier: "cell")
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    var dataSource: [Beer] = []
+    var dataSource = [Beer]()
+    
     let urlString = "https://api.punkapi.com/v2/beers"
     
     override func viewDidLoad() {
@@ -46,15 +47,18 @@ final class BeerListVC: BaseVC,UITableViewDataSource, UITableViewDelegate{
         AF.request(urlString).responseJSON { (response) in
             switch response.result {
             case .success(let res):
+                let ressponse = response.result
+                print(ressponse)
                 do {
-                    let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
-                    let json = try JSONDecoder().decode(BeerList.self, from: jsonData)
-                    self.dataSource = json.beers
+                    let decoder = JSONDecoder()
+                    let json = try decoder.decode([Beer].self, from: response.data ?? .init())
+                    self.dataSource = json
+                    print(json)
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }
                 } catch(let err) {
-                    print(String(describing: err))
+                    print(err.localizedDescription)
                 }
             case .failure(let err):
                 print(err.localizedDescription)
@@ -68,7 +72,7 @@ final class BeerListVC: BaseVC,UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! BeerCell
-        cell.descriptionLabel.text = dataSource[indexPath.row].description
+        cell.textLabel?.text = dataSource[indexPath.row].description
         return cell
     }
 }

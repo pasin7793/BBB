@@ -9,15 +9,20 @@ import Foundation
 
 struct BeerList: Codable{
     let beers: [Beer]
+    
+    private enum CodingKeys: String, CodingKey{
+        case beers
+        
+    }
 }
 
 struct Beer: Codable{
-    let image_url: URL
+    let image_url: String
     let description: String
     
-    enum CodingKeys: String,CodingKey{
-        case image_url = "image_url"
+    private enum CodingKeys: String, CodingKey{
         case description
+        case image_url = "image_url"
     }
 }
 

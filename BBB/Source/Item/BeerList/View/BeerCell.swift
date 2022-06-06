@@ -17,9 +17,10 @@ class BeerCell: UITableViewCell{
     let descriptionLabel = UILabel().then{
         $0.font = UIFont(name: "Helvetica", size: 10)
     }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.setLayout()
+        setLayout()
     }
 
     required init?(coder: NSCoder) {
@@ -35,7 +36,7 @@ class BeerCell: UITableViewCell{
             make.top.equalTo(30)
         }
         descriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(image.snp.bottom)
+            make.centerX.equalToSuperview()
         }
     }
 }
