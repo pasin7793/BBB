@@ -4,6 +4,8 @@ import UIKit
 import SnapKit
 import Then
 import Alamofire
+import Kingfisher
+import AlamofireImage
 
 final class BeerListVC: BaseVC,UITableViewDataSource, UITableViewDelegate{
     
@@ -17,6 +19,8 @@ final class BeerListVC: BaseVC,UITableViewDataSource, UITableViewDelegate{
     private let tableView = UITableView().then{
         $0.register(BeerCell.self, forCellReuseIdentifier: "cell")
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.rowHeight = 200
+        $0.separatorStyle = .none
     }
     var dataSource = [Beer]()
     
@@ -46,14 +50,14 @@ final class BeerListVC: BaseVC,UITableViewDataSource, UITableViewDelegate{
     func fetchData() {
         AF.request(urlString).responseJSON { (response) in
             switch response.result {
-            case .success(let res):
-                let ressponse = response.result
-                print(ressponse)
+            case .success:
+                let res = response.result
+                //print(res)
                 do {
                     let decoder = JSONDecoder()
                     let json = try decoder.decode([Beer].self, from: response.data ?? .init())
                     self.dataSource = json
-                    print(json)
+                    //print(json)
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }
@@ -72,8 +76,16 @@ final class BeerListVC: BaseVC,UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! BeerCell
-        cell.textLabel?.text = dataSource[indexPath.row].description
+        
+        let beer: Beer
+        beer = dataSource[indexPath.row]
+        cell.descriptionLabel.text = dataSource[indexPath.row].description
+        AF.request(beer.imageUrl).responseImage { response in
+            if let image = response.value{
+                cell.beerImage.image = image
+            }
+        }
+        cell.selectionStyle = .none
         return cell
     }
 }
-

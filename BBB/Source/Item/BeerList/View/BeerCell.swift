@@ -12,10 +12,11 @@ import Then
 
 class BeerCell: UITableViewCell{
     
-    let image = UIImageView()
+    var beerImage = UIImageView()
     
-    let descriptionLabel = UILabel().then{
-        $0.font = UIFont(name: "Helvetica", size: 10)
+    let descriptionLabel = UITextView().then{
+        $0.font = UIFont(name: "Helvetica-bold", size: 16)
+        $0.textAlignment = .center
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -27,16 +28,21 @@ class BeerCell: UITableViewCell{
         fatalError("init(coder:) has not been implemented")
     }
     func setLayout(){
-        self.addSubview(image)
+        self.addSubview(beerImage)
         self.addSubview(descriptionLabel)
         
-        image.snp.makeConstraints { make in
+        beerImage.snp.makeConstraints { make in
             make.width.equalTo(120)
             make.height.equalTo(135)
-            make.top.equalTo(30)
+            make.top.equalTo(descriptionLabel)
+
         }
         descriptionLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
+            make.width.equalTo(232)
+            make.height.equalTo(100)
+            make.trailing.equalToSuperview()
+            make.centerY.equalToSuperview()
         }
     }
 }
+
