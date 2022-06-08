@@ -8,15 +8,14 @@
 import Foundation
 
 struct Beer: Codable{
+    let id: Int
     let imageUrl: String
     let description: String
     
     private enum CodingKeys: String, CodingKey{
+        case id
         case description
         case imageUrl = "image_url"
-    }
-    public func getImage() -> String {
-        return self.imageUrl
     }
 }
 

@@ -26,6 +26,7 @@
 		94D25FF228485F76002566C3 /* BeerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D25FF128485F76002566C3 /* BeerCell.swift */; };
 		94D25FF52848B1EE002566C3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 94D25FF42848B1EE002566C3 /* Kingfisher */; };
 		94D25FFB284F7246002566C3 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 94D25FFA284F7246002566C3 /* AlamofireImage */; };
+		94D25FFD284F9395002566C3 /* DetailBeerListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D25FFC284F9395002566C3 /* DetailBeerListVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		94703B5728450AC9004AAE42 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		94703B632846E510004AAE42 /* BeerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerList.swift; sourceTree = "<group>"; };
 		94D25FF128485F76002566C3 /* BeerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerCell.swift; sourceTree = "<group>"; };
+		94D25FFC284F9395002566C3 /* DetailBeerListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBeerListVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +214,7 @@
 			children = (
 				94D25FEA2847C44F002566C3 /* View */,
 				94703B502844E018004AAE42 /* BeerListVC.swift */,
+				94D25FFC284F9395002566C3 /* DetailBeerListVC.swift */,
 			);
 			path = BeerList;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				94703B172844DF04004AAE42 /* AppDelegate.swift in Sources */,
 				94703B552844E030004AAE42 /* RandomBeerVC.swift in Sources */,
 				94703B4D2844DFC8004AAE42 /* TabBarVC.swift in Sources */,
+				94D25FFD284F9395002566C3 /* DetailBeerListVC.swift in Sources */,
 				94703B642846E510004AAE42 /* BeerList.swift in Sources */,
 				94D25FF228485F76002566C3 /* BeerCell.swift in Sources */,
 				94703B512844E018004AAE42 /* BeerListVC.swift in Sources */,

@@ -35,7 +35,7 @@ class BeerCell: UITableViewCell{
             make.width.equalTo(120)
             make.height.equalTo(135)
             make.top.equalTo(descriptionLabel)
-
+            make.left.equalTo(21)
         }
         descriptionLabel.snp.makeConstraints { make in
             make.width.equalTo(232)

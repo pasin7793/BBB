@@ -4,7 +4,6 @@ import UIKit
 import SnapKit
 import Then
 import Alamofire
-import Kingfisher
 import AlamofireImage
 
 final class BeerListVC: BaseVC,UITableViewDataSource, UITableViewDelegate{
@@ -87,5 +86,9 @@ final class BeerListVC: BaseVC,UITableViewDataSource, UITableViewDelegate{
         }
         cell.selectionStyle = .none
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
     }
 }
