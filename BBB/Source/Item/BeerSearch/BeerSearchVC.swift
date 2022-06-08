@@ -5,24 +5,27 @@ import Then
 import SnapKit
 import AlamofireImage
 import Alamofire
+import Kingfisher
 
 final class BeerSearchVC: BaseVC, UISearchBarDelegate{
+    
     private let searchBar = UISearchBar().then{
         $0.placeholder = "Search"
         $0.searchBarStyle = .minimal
     }
     private let beerImage = UIImageView()
+    
     private let idLabel = UILabel().then{
         $0.textColor = .black
         $0.font = UIFont(name: "Helvetica", size: 12)
     }
-    private let descriptionLabel = UITextView().then{
+    private let descriptionTextView = UITextView().then{
         $0.font = UIFont(name: "Helvetica-bold", size: 16)
         $0.textAlignment = .center
     }
     let urlString = "https://api.punkapi.com/v2/beers/"
     
-    var dataSource = [Beer]()
+    var dataSource: Beer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +37,7 @@ final class BeerSearchVC: BaseVC, UISearchBarDelegate{
         view.addSubview(searchBar)
         view.addSubview(beerImage)
         view.addSubview(idLabel)
-        view.addSubview(descriptionLabel)
+        view.addSubview(descriptionTextView)
     }
     override func setLayout() {
         searchBar.snp.makeConstraints { make in
@@ -47,27 +50,35 @@ final class BeerSearchVC: BaseVC, UISearchBarDelegate{
             make.width.equalTo(120)
             make.height.equalTo(135)
             make.centerX.equalToSuperview()
-            make.top.equalTo(30)
+            make.top.equalTo(searchBar).offset(60)
         }
         idLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(100)
+            make.top.equalTo(searchBar).offset(200)
+        }
+        descriptionTextView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(idLabel).offset(71)
+            make.width.equalTo(232)
+            make.height.equalTo(81)
         }
     }
     func fetchData() {
         AF.request(urlString+(searchBar.searchTextField.text)!).responseJSON { (response) in
             switch response.result {
             case .success(let res):
-                //let res = response.result
-                //print(res)
+                //let re = response.result
+                //print(re)
                 do {
                     let decoder = JSONDecoder()
-                    let json = try decoder.decode([Beer].self, from: response.data ?? .init())
+                    guard let json = try decoder.decode([Beer].self, from: response.data ?? .init()).first else { return }
                     self.dataSource = json
                     print(json)
-                    if let data = res as? Beer{
-                        self.idLabel.text = "\(data.id)"
-                    }
+                     
+                    self.beerImage.kf.setImage(with: URL(string: json.imageUrl),placeholder: UIImage())
+                    self.idLabel.text = "\(self.dataSource?.id ?? 0)"
+                    self.descriptionTextView.text = self.dataSource?.description
+                    
                 } catch(let err) {
                     print(err.localizedDescription)
                 }

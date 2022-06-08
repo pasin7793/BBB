@@ -76,14 +76,12 @@ final class BeerListVC: BaseVC,UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! BeerCell
         
+        cell.descriptionTextView.text = dataSource[indexPath.row].description
+        
         let beer: Beer
         beer = dataSource[indexPath.row]
-        cell.descriptionLabel.text = dataSource[indexPath.row].description
-        AF.request(beer.imageUrl).responseImage { response in
-            if let image = response.value{
-                cell.beerImage.image = image
-            }
-        }
+        cell.beerImage.kf.setImage(with: URL(string: beer.imageUrl) ?? .none,
+                                   placeholder: UIImage())
         cell.selectionStyle = .none
         return cell
     }

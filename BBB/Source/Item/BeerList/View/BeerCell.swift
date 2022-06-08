@@ -14,7 +14,7 @@ class BeerCell: UITableViewCell{
     
     var beerImage = UIImageView()
     
-    let descriptionLabel = UITextView().then{
+    let descriptionTextView = UITextView().then{
         $0.font = UIFont(name: "Helvetica-bold", size: 16)
         $0.textAlignment = .center
     }
@@ -29,15 +29,15 @@ class BeerCell: UITableViewCell{
     }
     func setLayout(){
         self.addSubview(beerImage)
-        self.addSubview(descriptionLabel)
+        self.addSubview(descriptionTextView)
         
         beerImage.snp.makeConstraints { make in
             make.width.equalTo(120)
             make.height.equalTo(135)
-            make.top.equalTo(descriptionLabel)
+            make.top.equalTo(descriptionTextView)
             make.left.equalTo(21)
         }
-        descriptionLabel.snp.makeConstraints { make in
+        descriptionTextView.snp.makeConstraints { make in
             make.width.equalTo(232)
             make.height.equalTo(100)
             make.trailing.equalToSuperview()
