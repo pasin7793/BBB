@@ -80,13 +80,15 @@ final class BeerListVC: BaseVC,UITableViewDataSource, UITableViewDelegate{
         
         let beer: Beer
         beer = dataSource[indexPath.row]
-        cell.beerImage.kf.setImage(with: URL(string: beer.imageUrl) ?? .none,
-                                   placeholder: UIImage())
+        cell.beerImage.kf.setImage(with: URL(string: beer.imageUrl) ?? .none, placeholder: UIImage())
         cell.selectionStyle = .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let detailVC = DetailBeerListVC()
+        let navigationController = UINavigationController(rootViewController: detailVC)
+        self.navigationController?.pushViewController(navigationController, animated: true)
+        print("asd")
     }
 }

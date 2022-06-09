@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import UIKit
 
 class DetailBeerListVC: BaseVC{
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("asd")
+        view.backgroundColor = .white
     }
 }
