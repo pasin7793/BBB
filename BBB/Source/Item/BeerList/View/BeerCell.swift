@@ -12,9 +12,9 @@ import Then
 
 final class BeerCell: UITableViewCell{
     
-    var beerImage = UIImageView()
+    private var beerImage = UIImageView()
     
-    let descriptionTextView = UITextView().then{
+    private let descriptionTextView = UITextView().then{
         $0.font = UIFont(name: "Helvetica-bold", size: 16)
         $0.textAlignment = .center
     }
