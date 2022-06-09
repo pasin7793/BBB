@@ -20,8 +20,7 @@ final class BeerCell: BaseTableViewCell{
     }
     
     override func addView() {
-        self.addSubview(beerImage)
-        self.addSubview(descriptionTextView)
+        self.addSubViews(beerImage,descriptionTextView)
     }
     override func setLayout(){
         
