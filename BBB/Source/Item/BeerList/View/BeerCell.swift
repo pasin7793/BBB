@@ -10,11 +10,11 @@ import SnapKit
 import UIKit
 import Then
 
-final class BeerCell: UITableViewCell{
+final class BeerCell: BaseTableViewCell{
     
-    private var beerImage = UIImageView()
+    public var beerImage = UIImageView()
     
-    private let descriptionTextView = UITextView().then{
+    public let descriptionTextView = UITextView().then{
         $0.font = UIFont(name: "Helvetica-bold", size: 16)
         $0.textAlignment = .center
     }
@@ -27,9 +27,11 @@ final class BeerCell: UITableViewCell{
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    func setLayout(){
+    override func addView() {
         self.addSubview(beerImage)
         self.addSubview(descriptionTextView)
+    }
+    override func setLayout(){
         
         beerImage.snp.makeConstraints { make in
             make.width.equalTo(120)
