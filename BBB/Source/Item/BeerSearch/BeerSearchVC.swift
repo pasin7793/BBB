@@ -12,7 +12,7 @@ final class BeerSearchVC: BaseVC, UISearchBarDelegate{
         $0.placeholder = "Search"
         $0.searchBarStyle = .minimal
     }
-    private let beerImage = UIImageView()
+    private let beerImageView = UIImageView()
     
     private let idLabel = UILabel().then{
         $0.textColor = .black
@@ -34,7 +34,7 @@ final class BeerSearchVC: BaseVC, UISearchBarDelegate{
     }
     override func addView() {
         view.addSubview(searchBar)
-        view.addSubview(beerImage)
+        view.addSubview(beerImageView)
         view.addSubview(idLabel)
         view.addSubview(descriptionTextView)
     }
@@ -45,7 +45,7 @@ final class BeerSearchVC: BaseVC, UISearchBarDelegate{
             make.centerX.equalToSuperview()
             make.height.equalTo(36)
         }
-        beerImage.snp.makeConstraints { make in
+        beerImageView.snp.makeConstraints { make in
             make.width.equalTo(120)
             make.height.equalTo(135)
             make.centerX.equalToSuperview()
@@ -74,7 +74,7 @@ final class BeerSearchVC: BaseVC, UISearchBarDelegate{
                     self.dataSource = json
                     print(json)
                      
-                    self.beerImage.kf.setImage(with: URL(string: json.imageUrl),placeholder: UIImage())
+                    self.beerImageView.kf.setImage(with: URL(string: json.imageUrl),placeholder: UIImage())
                     self.idLabel.text = "\(self.dataSource?.id ?? 0)"
                     self.descriptionTextView.text = self.dataSource?.description
                     
