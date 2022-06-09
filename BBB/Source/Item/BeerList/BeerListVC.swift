@@ -6,7 +6,7 @@ import Then
 import Alamofire
 import AlamofireImage
 
-final class BeerListVC: BaseVC,UITableViewDataSource, UITableViewDelegate{
+final class BeerListVC: BaseVC{
     
     private let beerListLabel = UILabel().then{
         $0.font = UIFont(name: "Helvetica-Bold", size: 32)
@@ -68,7 +68,9 @@ final class BeerListVC: BaseVC,UITableViewDataSource, UITableViewDelegate{
             }
         }
     }
-    
+}
+
+extension BeerListVC: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
