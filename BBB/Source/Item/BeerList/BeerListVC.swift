@@ -78,12 +78,13 @@ extension BeerListVC: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! BeerCell
         
-        cell.descriptionTextView.text = dataSource[indexPath.row].description
-        
         let beer: Beer
         beer = dataSource[indexPath.row]
+        
+        cell.descriptionTextView.text = beer.description
         cell.beerImage.kf.setImage(with: URL(string: beer.imageUrl) ?? .none,
                                    placeholder: UIImage())
+        
         cell.selectionStyle = .none
         return cell
     }
