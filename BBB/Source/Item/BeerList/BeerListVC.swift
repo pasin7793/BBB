@@ -4,7 +4,6 @@ import UIKit
 import SnapKit
 import Then
 import Alamofire
-import AlamofireImage
 
 final class BeerListVC: BaseVC{
     

@@ -3,7 +3,6 @@ import Foundation
 import UIKit
 import Then
 import SnapKit
-import AlamofireImage
 import Alamofire
 import Kingfisher
 
