@@ -10,7 +10,7 @@ import SnapKit
 import UIKit
 import Then
 
-class BeerCell: UITableViewCell{
+final class BeerCell: UITableViewCell{
     
     var beerImage = UIImageView()
     
