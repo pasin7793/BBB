@@ -23,7 +23,7 @@ final class BeerListVC: BaseVC{
     var dataSource: [Beer]?
     
     let urlString = "https://api.punkapi.com/v2/beers"
-    var viewModel = BeerListViewModel()
+    let viewModel = BeerListViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +60,6 @@ extension BeerListVC: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! BeerCell
-        
         cell.descriptionTextView.text = dataSource![indexPath.row].description
         cell.beerImage.kf.setImage(with: URL(string: dataSource![indexPath.row].imageUrl))
         
