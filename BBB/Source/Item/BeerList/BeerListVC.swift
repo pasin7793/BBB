@@ -20,7 +20,7 @@ final class BeerListVC: BaseVC{
         $0.rowHeight = 200
         $0.separatorStyle = .none
     }
-    var dataSource = [Beer]()
+    var dataSource: [Beer]?
     
     let urlString = "https://api.punkapi.com/v2/beers"
     var viewModel = BeerListViewModel()
@@ -32,7 +32,7 @@ final class BeerListVC: BaseVC{
         tableView.delegate = self
         
         viewModel.fetchData{ [weak self] in
-            self?.dataSource = (self?.viewModel.dataSource)!
+            self?.dataSource = self?.viewModel.dataSource
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
@@ -55,17 +55,14 @@ final class BeerListVC: BaseVC{
 
 extension BeerListVC: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.dataSource.count
+        return viewModel.dataSource?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! BeerCell
         
-        let beer: Beer = viewModel.dataSource[indexPath.row]
-        
-        cell.descriptionTextView.text = beer.description
-        cell.beerImage.kf.setImage(with: URL(string: beer.imageUrl) ?? .none,
-                                   placeholder: UIImage())
+        cell.descriptionTextView.text = dataSource![indexPath.row].description
+        cell.beerImage.kf.setImage(with: URL(string: dataSource![indexPath.row].imageUrl))
         
         cell.selectionStyle = .none
         return cell

@@ -10,8 +10,8 @@ import Alamofire
 
 final class BeerListViewModel{
     
-    let urlString = "https://api.punkapi.com/v2/beers"
-    var dataSource = [Beer]()
+    private let urlString = "https://api.punkapi.com/v2/beers"
+    var dataSource: [Beer]?
     
     func fetchData(completion: @escaping ()->()) {
         AF.request(urlString).responseJSON { (response) in
