@@ -20,7 +20,6 @@ final class BeerListVC: BaseVC{
         $0.rowHeight = 200
         $0.separatorStyle = .none
     }
-    var dataSource: [Beer]?
     let viewModel = BeerListViewModel()
     
     override func viewDidLoad() {
@@ -30,7 +29,6 @@ final class BeerListVC: BaseVC{
         tableView.delegate = self
         
         viewModel.fetchData{ [weak self] in
-            self?.dataSource = self?.viewModel.dataSource
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
@@ -58,8 +56,8 @@ extension BeerListVC: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! BeerCell
-        cell.descriptionTextView.text = dataSource![indexPath.row].description
-        cell.beerImage.kf.setImage(with: URL(string: dataSource![indexPath.row].imageUrl))
+        cell.descriptionTextView.text = viewModel.dataSource![indexPath.row].description
+        cell.beerImage.kf.setImage(with: URL(string: viewModel.dataSource![indexPath.row].imageUrl))
         
         cell.selectionStyle = .none
         return cell
