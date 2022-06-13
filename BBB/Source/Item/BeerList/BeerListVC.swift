@@ -21,8 +21,6 @@ final class BeerListVC: BaseVC{
         $0.separatorStyle = .none
     }
     var dataSource: [Beer]?
-    
-    let urlString = "https://api.punkapi.com/v2/beers"
     let viewModel = BeerListViewModel()
     
     override func viewDidLoad() {
