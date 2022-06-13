@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-class BeerListViewModel{
+final class BeerListViewModel{
     
     let urlString = "https://api.punkapi.com/v2/beers"
     var dataSource = [Beer]()
