@@ -23,17 +23,23 @@ final class BeerListVC: BaseVC{
     var dataSource = [Beer]()
     
     let urlString = "https://api.punkapi.com/v2/beers"
+    var viewModel = BeerListViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchData()
         view.backgroundColor = .white
         tableView.dataSource = self
         tableView.delegate = self
+        
+        viewModel.fetchData{ [weak self] in
+            self?.dataSource = (self?.viewModel.dataSource)!
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
     }
     override func addView() {
-        view.addSubview(beerListLabel)
-        view.addSubview(tableView)
+        view.addSubViews(beerListLabel,tableView)
     }
     override func setLayout() {
         beerListLabel.snp.makeConstraints { make in
@@ -45,39 +51,17 @@ final class BeerListVC: BaseVC{
             make.edges.equalToSuperview()
         }
     }
-    func fetchData() {
-        AF.request(urlString).responseJSON { (response) in
-            switch response.result {
-            case .success:
-                let res = response.result
-                //print(res)
-                do {
-                    let decoder = JSONDecoder()
-                    let json = try decoder.decode([Beer].self, from: response.data ?? .init())
-                    self.dataSource = json
-                    //print(json)
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                } catch(let err) {
-                    print(err.localizedDescription)
-                }
-            case .failure(let err):
-                print(err.localizedDescription)
-            }
-        }
-    }
 }
 
 extension BeerListVC: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.count
+        return viewModel.dataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! BeerCell
         
-        let beer: Beer = dataSource[indexPath.row]
+        let beer: Beer = viewModel.dataSource[indexPath.row]
         
         cell.descriptionTextView.text = beer.description
         cell.beerImage.kf.setImage(with: URL(string: beer.imageUrl) ?? .none,
@@ -85,9 +69,5 @@ extension BeerListVC: UITableViewDataSource, UITableViewDelegate{
         
         cell.selectionStyle = .none
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
     }
 }
