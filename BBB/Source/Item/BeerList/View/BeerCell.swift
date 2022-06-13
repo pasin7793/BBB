@@ -14,24 +14,23 @@ final class BeerCell: BaseTableViewCell{
     
     let beerImage = UIImageView()
     
-    let descriptionTextView = UITextView().then{
+    let descriptionLabel = UILabel().then{
         $0.font = UIFont(name: "Helvetica-bold", size: 16)
         $0.textAlignment = .center
-        $0.isEditable = false
     }
     
     override func addView() {
-        self.addSubViews(beerImage,descriptionTextView)
+        self.addSubViews(beerImage,descriptionLabel)
     }
     override func setLayout(){
         
         beerImage.snp.makeConstraints { make in
             make.width.equalTo(120)
             make.height.equalTo(135)
-            make.top.equalTo(descriptionTextView)
+            make.top.equalTo(descriptionLabel)
             make.left.equalTo(21)
         }
-        descriptionTextView.snp.makeConstraints { make in
+        descriptionLabel.snp.makeConstraints { make in
             make.width.equalTo(232)
             make.height.equalTo(100)
             make.trailing.equalToSuperview()

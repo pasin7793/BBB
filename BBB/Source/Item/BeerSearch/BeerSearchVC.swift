@@ -18,10 +18,9 @@ final class BeerSearchVC: BaseVC, UISearchBarDelegate{
         $0.textColor = .black
         $0.font = UIFont(name: "Helvetica", size: 12)
     }
-    private let descriptionTextView = UITextView().then{
+    private let descriptionLabel = UILabel().then{
         $0.font = UIFont(name: "Helvetica-bold", size: 16)
         $0.textAlignment = .center
-        $0.isEditable = false
     }
     let urlString = "https://api.punkapi.com/v2/beers/"
     
@@ -31,7 +30,7 @@ final class BeerSearchVC: BaseVC, UISearchBarDelegate{
         super.viewDidLoad()
     }
     override func addView() {
-        view.addSubViews(searchBar,beerImageView,idLabel,descriptionTextView)
+        view.addSubViews(searchBar,beerImageView,idLabel,descriptionLabel)
     }
     override func setUp() {
         view.backgroundColor = .white
@@ -55,7 +54,7 @@ final class BeerSearchVC: BaseVC, UISearchBarDelegate{
             make.centerX.equalToSuperview()
             make.top.equalTo(searchBar).offset(200)
         }
-        descriptionTextView.snp.makeConstraints { make in
+        descriptionLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(idLabel).offset(71)
             make.width.equalTo(232)
@@ -76,7 +75,7 @@ final class BeerSearchVC: BaseVC, UISearchBarDelegate{
                      
                     self.beerImageView.kf.setImage(with: URL(string: json.imageUrl),placeholder: UIImage())
                     self.idLabel.text = "\(self.dataSource?.id ?? 0)"
-                    self.descriptionTextView.text = self.dataSource?.description
+                    self.descriptionLabel.text = self.dataSource?.description
                     
                 } catch(let err) {
                     print(err.localizedDescription)
