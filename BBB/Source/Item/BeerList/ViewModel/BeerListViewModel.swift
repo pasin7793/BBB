@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import UIKit
 
 final class BeerListViewModel{
     
@@ -23,10 +24,14 @@ final class BeerListViewModel{
                     let decoder = JSONDecoder()
                     let json = try! decoder.decode([Beer].self, from: response.data ?? .init())
                     self.dataSource = json
-                    print(self.dataSource)
+                    print(self.dataSource!)
                     completion()
                 } catch(let err) {
                     print(err.localizedDescription)
+                    let alert = UIAlertController(title: "오류", message: "응 아니야", preferredStyle: UIAlertController.Style.alert)
+                    let defaultAction = UIAlertAction(title: "확인", style: .destructive, handler : nil)
+                    alert.addAction(defaultAction)
+                    alert.present(alert, animated: true)
                 }
             case .failure(let err):
                 print(err.localizedDescription)
