@@ -28,15 +28,12 @@ final class BeerSearchVC: BaseVC, UISearchBarDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func setUp() {
         view.backgroundColor = .white
         searchBar.delegate = self
         searchBar.isSearchResultsButtonSelected = true
-    }
-    override func addView() {
-        view.addSubview(searchBar)
-        view.addSubview(beerImageView)
-        view.addSubview(idLabel)
-        view.addSubview(descriptionTextView)
     }
     override func setLayout() {
         searchBar.snp.makeConstraints { make in
