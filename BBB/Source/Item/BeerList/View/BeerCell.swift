@@ -12,7 +12,7 @@ import Then
 
 final class BeerCell: BaseTableViewCell{
     
-    var beerImage = UIImageView()
+    let beerImage = UIImageView()
     
     let descriptionTextView = UITextView().then{
         $0.font = UIFont(name: "Helvetica-bold", size: 16)
