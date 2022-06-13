@@ -21,6 +21,7 @@ final class BeerSearchVC: BaseVC, UISearchBarDelegate{
     private let descriptionTextView = UITextView().then{
         $0.font = UIFont(name: "Helvetica-bold", size: 16)
         $0.textAlignment = .center
+        $0.isEditable = false
     }
     let urlString = "https://api.punkapi.com/v2/beers/"
     
