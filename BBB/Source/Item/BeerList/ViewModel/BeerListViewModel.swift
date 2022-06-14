@@ -28,10 +28,6 @@ final class BeerListViewModel{
                     completion()
                 } catch(let err) {
                     print(err.localizedDescription)
-                    let alert = UIAlertController(title: "오류", message: "응 아니야", preferredStyle: UIAlertController.Style.alert)
-                    let defaultAction = UIAlertAction(title: "확인", style: .destructive, handler : nil)
-                    alert.addAction(defaultAction)
-                    alert.present(alert, animated: true)
                 }
             case .failure(let err):
                 print(err.localizedDescription)

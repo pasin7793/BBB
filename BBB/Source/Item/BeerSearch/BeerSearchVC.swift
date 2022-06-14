@@ -22,7 +22,6 @@ final class BeerSearchVC: BaseVC, UISearchBarDelegate{
         $0.font = UIFont(name: "Helvetica-bold", size: 16)
         $0.textAlignment = .center
     }
-    let urlString = "https://api.punkapi.com/v2/beers/"
     
     var dataSource: Beer?
     
