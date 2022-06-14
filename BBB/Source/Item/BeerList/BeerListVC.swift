@@ -7,14 +7,6 @@ import Alamofire
 
 final class BeerListVC: BaseVC{
     
-    private let beerListLabel = UILabel().then{
-        $0.font = UIFont(name: "Helvetica-Bold", size: 32)
-        $0.text = "BeerList"
-        $0.textColor = .black
-        $0.textAlignment = .center
-        $0.numberOfLines = 0
-    }
-    
     private let tableView = UITableView().then{
         $0.register(BeerCell.self, forCellReuseIdentifier: "cell")
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -29,6 +21,8 @@ final class BeerListVC: BaseVC{
     }
     override func configureVC() {
         view.backgroundColor = .white
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.title = "BeerList"
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,14 +34,9 @@ final class BeerListVC: BaseVC{
         }
     }
     override func addView() {
-        view.addSubViews(beerListLabel,tableView)
+        view.addSubViews(tableView)
     }
     override func setLayout() {
-        beerListLabel.snp.makeConstraints { make in
-            make.top.equalTo(88)
-            make.left.equalTo(view.snp.left)
-            make.width.equalTo(148)
-        }
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
