@@ -23,11 +23,13 @@ final class BeerListVC: BaseVC{
     }
     private let viewModel = BeerListViewModel()
     
+    override func setUp() {
+        tableView.dataSource = self
+        tableView.delegate = self
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        tableView.dataSource = self
-        tableView.delegate = self
         
         viewModel.fetchData{ [weak self] in
             DispatchQueue.main.async {
