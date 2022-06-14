@@ -27,9 +27,11 @@ final class BeerListVC: BaseVC{
         tableView.dataSource = self
         tableView.delegate = self
     }
+    override func configureVC() {
+        view.backgroundColor = .white
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         
         viewModel.fetchData{ [weak self] in
             DispatchQueue.main.async {
