@@ -21,7 +21,7 @@ final class BeerListVC: BaseVC{
         $0.rowHeight = 200
         $0.separatorStyle = .none
     }
-    let viewModel = BeerListViewModel()
+    private let viewModel = BeerListViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
