@@ -12,6 +12,7 @@ final class BeerListVC: BaseVC{
         $0.text = "BeerList"
         $0.textColor = .black
         $0.textAlignment = .center
+        $0.numberOfLines = 0
     }
     
     private let tableView = UITableView().then{

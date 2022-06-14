@@ -17,6 +17,7 @@ final class BeerCell: BaseTableViewCell{
     let descriptionLabel = UILabel().then{
         $0.font = UIFont(name: "Helvetica-bold", size: 16)
         $0.textAlignment = .center
+        $0.numberOfLines = 0
     }
     
     override func addView() {
