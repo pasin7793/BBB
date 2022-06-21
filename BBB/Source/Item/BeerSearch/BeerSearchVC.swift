@@ -26,6 +26,7 @@ final class BeerSearchVC: BaseVC, UISearchBarDelegate{
     
     private var dataSource: Beer?
     
+    private let viewModel = BeerListViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -69,14 +70,18 @@ final class BeerSearchVC: BaseVC, UISearchBarDelegate{
                 //print(re)
                 do {
                     let decoder = JSONDecoder()
-                    guard let json = try decoder.decode([Beer].self, from: response.data ?? .init()).first else { return }
-                    self.dataSource = json
+                    let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
+                    let json = try decoder.decode([Beer].self, from: jsonData)
+                    self.viewModel.dataSource = json
                     print(json)
                      
-                    self.beerImageView.kf.setImage(with: URL(string: json.imageUrl),placeholder: UIImage())
+                    /*self.beerImageView.kf.setImage(with: URL(string: json.imageUrl),placeholder: UIImage())
                     self.idLabel.text = "\(self.dataSource?.id ?? 0)"
-                    self.descriptionLabel.text = self.dataSource?.description
+                    self.descriptionLabel.text = self.dataSource?.description*/
                     
+                    self.beerImageView.kf.setImage(with: URL(string: self.viewModel.dataSource.first?.imageUrl ?? ""))
+                    self.idLabel.text = "\(self.viewModel.dataSource.first?.id ?? 0)"
+                    self.descriptionLabel.text = self.viewModel.dataSource.first?.description
                 } catch(let err) {
                     print(err.localizedDescription)
                 }
