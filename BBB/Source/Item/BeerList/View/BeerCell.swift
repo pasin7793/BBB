@@ -19,9 +19,6 @@ final class BeerCell: BaseTableViewCell{
         $0.textAlignment = .center
         $0.numberOfLines = 0
     }
-    private let urlString = "https://api.punkapi.com/v2/beers"
-    
-    private let viewModel = BeerListViewModel()
     
     override func addView() {
         self.addSubViews(beerImage,descriptionLabel)
