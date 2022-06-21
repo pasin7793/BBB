@@ -50,9 +50,7 @@ extension BeerListVC: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! BeerCell
-        cell.descriptionLabel.text = viewModel.dataSource[indexPath.row].description
-        cell.beerImage.kf.setImage(with: URL(string: viewModel.dataSource[indexPath.row].imageUrl))
-        
+        cell.bind(model: viewModel.dataSource[indexPath.row])
         cell.selectionStyle = .none
         return cell
     }

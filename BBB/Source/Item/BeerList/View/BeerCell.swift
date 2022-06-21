@@ -12,13 +12,16 @@ import Then
 
 final class BeerCell: BaseTableViewCell{
     
-    let beerImage = UIImageView()
+    private let beerImage = UIImageView()
     
-    let descriptionLabel = UILabel().then{
+    private let descriptionLabel = UILabel().then{
         $0.font = UIFont(name: "Helvetica-bold", size: 16)
         $0.textAlignment = .center
         $0.numberOfLines = 0
     }
+    private let urlString = "https://api.punkapi.com/v2/beers"
+    
+    private let viewModel = BeerListViewModel()
     
     override func addView() {
         self.addSubViews(beerImage,descriptionLabel)
@@ -36,6 +39,12 @@ final class BeerCell: BaseTableViewCell{
             make.height.equalTo(100)
             make.trailing.equalToSuperview()
             make.centerY.equalToSuperview()
+        }
+    }
+    func bind(model: Beer) {
+        DispatchQueue.main.async {
+            self.beerImage.kf.setImage(with: URL(string: model.imageUrl))
+            self.descriptionLabel.text = model.description
         }
     }
 }
