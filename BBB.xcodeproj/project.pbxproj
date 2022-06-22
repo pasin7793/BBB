@@ -114,6 +114,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		9443545628636A9D005B00C8 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				944354522862A88B005B00C8 /* Dynamic.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		94703B0A2844DF04004AAE42 = {
 			isa = PBXGroup;
 			children = (
@@ -137,13 +145,13 @@
 		94703B152844DF04004AAE42 /* BBB */ = {
 			isa = PBXGroup;
 			children = (
+				9443545628636A9D005B00C8 /* Util */,
 				94D26003285256F5002566C3 /* Extension */,
 				94703B622846E4FE004AAE42 /* Model */,
 				94703B5628450AC2004AAE42 /* Base */,
 				94703B462844DF17004AAE42 /* App */,
 				94703B482844DF69004AAE42 /* Source */,
 				94703B472844DF2A004AAE42 /* Resource */,
-				944354522862A88B005B00C8 /* Dynamic.swift */,
 			);
 			path = BBB;
 			sourceTree = "<group>";
