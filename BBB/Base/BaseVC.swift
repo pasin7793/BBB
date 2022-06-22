@@ -21,5 +21,4 @@ class BaseVC: UIViewController{
     func configureVC(){}
     func addView(){}
     func setLayout(){}
-    
 }

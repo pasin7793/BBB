@@ -9,6 +9,45 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>SnapKitPlayground (Playground) 1.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>SnapKitPlayground (Playground) 2.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>SnapKitPlayground (Playground).xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>94703B122844DF04004AAE42</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>94703B282844DF06004AAE42</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>94703B322844DF06004AAE42</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 	</dict>
 </dict>
 </plist>
