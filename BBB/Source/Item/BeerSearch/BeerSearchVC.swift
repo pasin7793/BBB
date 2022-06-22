@@ -22,14 +22,9 @@ final class BeerSearchVC: BaseVC, UISearchBarDelegate{
         $0.font = UIFont(name: "Helvetica-bold", size: 16)
         $0.textAlignment = .center
     }
-    private let urlString = "https://api.punkapi.com/v2/beers/"
     
-    private var dataSource: Beer?
-    
-    private let viewModel = BeerListViewModel()
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    private let viewModel = BeerSearchViewModel()
+
     override func addView() {
         view.addSubViews(searchBar,beerImageView,idLabel,descriptionLabel)
     }
@@ -62,36 +57,20 @@ final class BeerSearchVC: BaseVC, UISearchBarDelegate{
             make.height.equalTo(81)
         }
     }
-    func fetchData() {
-        AF.request(urlString+(searchBar.searchTextField.text)!).responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                //let re = response.result
-                //print(re)
-                do {
-                    let decoder = JSONDecoder()
-                    let jsonData = try JSONSerialization.data(withJSONObject: res, options: .prettyPrinted)
-                    let json = try decoder.decode([Beer].self, from: jsonData)
-                    self.viewModel.dataSource = json
-                    print(json)
-                     
-                    /*self.beerImageView.kf.setImage(with: URL(string: json.imageUrl),placeholder: UIImage())
-                    self.idLabel.text = "\(self.dataSource?.id ?? 0)"
-                    self.descriptionLabel.text = self.dataSource?.description*/
-                    
-                    self.beerImageView.kf.setImage(with: URL(string: self.viewModel.dataSource.first?.imageUrl ?? ""))
-                    self.idLabel.text = "\(self.viewModel.dataSource.first?.id ?? 0)"
-                    self.descriptionLabel.text = self.viewModel.dataSource.first?.description
-                } catch(let err) {
-                    print(err.localizedDescription)
-                }
-            case .failure(let err):
-                print(err.localizedDescription)
+    override func viewDidLoad(){
+        super.viewDidLoad()
+        viewModel.beer.bind { [weak self] beer in
+            guard let beer = beer else {return}
+            DispatchQueue.main.async {
+                self?.beerImageView.kf.setImage(with: URL(string: beer.imageUrl))
+                self?.idLabel.text = "\(beer.id)"
+                self?.descriptionLabel.text = beer.description
             }
         }
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.endEditing(true)
-        fetchData()
+        print(searchBar.text)
+        viewModel.fetchData(searchText: searchBar.text ?? "")
     }
 }
