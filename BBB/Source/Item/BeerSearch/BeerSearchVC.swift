@@ -3,7 +3,6 @@ import Foundation
 import UIKit
 import Then
 import SnapKit
-import AlamofireImage
 import Alamofire
 import Kingfisher
 
@@ -13,31 +12,26 @@ final class BeerSearchVC: BaseVC, UISearchBarDelegate{
         $0.placeholder = "Search"
         $0.searchBarStyle = .minimal
     }
-    private let beerImage = UIImageView()
+    private let beerImageView = UIImageView()
     
     private let idLabel = UILabel().then{
         $0.textColor = .black
         $0.font = UIFont(name: "Helvetica", size: 12)
     }
-    private let descriptionTextView = UITextView().then{
+    private let descriptionLabel = UILabel().then{
         $0.font = UIFont(name: "Helvetica-bold", size: 16)
         $0.textAlignment = .center
     }
-    let urlString = "https://api.punkapi.com/v2/beers/"
     
-    var dataSource: Beer?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    private let viewModel = BeerSearchViewModel()
+
+    override func addView() {
+        view.addSubViews(searchBar,beerImageView,idLabel,descriptionLabel)
+    }
+    override func setUp() {
         view.backgroundColor = .white
         searchBar.delegate = self
         searchBar.isSearchResultsButtonSelected = true
-    }
-    override func addView() {
-        view.addSubview(searchBar)
-        view.addSubview(beerImage)
-        view.addSubview(idLabel)
-        view.addSubview(descriptionTextView)
     }
     override func setLayout() {
         searchBar.snp.makeConstraints { make in
@@ -46,7 +40,7 @@ final class BeerSearchVC: BaseVC, UISearchBarDelegate{
             make.centerX.equalToSuperview()
             make.height.equalTo(36)
         }
-        beerImage.snp.makeConstraints { make in
+        beerImageView.snp.makeConstraints { make in
             make.width.equalTo(120)
             make.height.equalTo(135)
             make.centerX.equalToSuperview()
@@ -56,39 +50,27 @@ final class BeerSearchVC: BaseVC, UISearchBarDelegate{
             make.centerX.equalToSuperview()
             make.top.equalTo(searchBar).offset(200)
         }
-        descriptionTextView.snp.makeConstraints { make in
+        descriptionLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(idLabel).offset(71)
             make.width.equalTo(232)
             make.height.equalTo(81)
         }
     }
-    func fetchData() {
-        AF.request(urlString+(searchBar.searchTextField.text)!).responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                //let re = response.result
-                //print(re)
-                do {
-                    let decoder = JSONDecoder()
-                    guard let json = try decoder.decode([Beer].self, from: response.data ?? .init()).first else { return }
-                    self.dataSource = json
-                    print(json)
-                     
-                    self.beerImage.kf.setImage(with: URL(string: json.imageUrl),placeholder: UIImage())
-                    self.idLabel.text = "\(self.dataSource?.id ?? 0)"
-                    self.descriptionTextView.text = self.dataSource?.description
-                    
-                } catch(let err) {
-                    print(err.localizedDescription)
-                }
-            case .failure(let err):
-                print(err.localizedDescription)
+    override func viewDidLoad(){
+        super.viewDidLoad()
+        viewModel.beer.bind { [weak self] beer in
+            guard let beer = beer else {return}
+            DispatchQueue.main.async {
+                self?.beerImageView.kf.setImage(with: URL(string: beer.imageUrl))
+                self?.idLabel.text = "\(beer.id)"
+                self?.descriptionLabel.text = beer.description
             }
         }
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.endEditing(true)
-        fetchData()
+        print(searchBar.text)
+        viewModel.fetchData(searchText: searchBar.text ?? "")
     }
 }

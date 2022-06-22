@@ -10,38 +10,38 @@ import SnapKit
 import UIKit
 import Then
 
-class BeerCell: UITableViewCell{
+final class BeerCell: BaseTableViewCell{
     
-    var beerImage = UIImageView()
+    private let beerImage = UIImageView()
     
-    let descriptionTextView = UITextView().then{
+    private let descriptionLabel = UILabel().then{
         $0.font = UIFont(name: "Helvetica-bold", size: 16)
         $0.textAlignment = .center
+        $0.numberOfLines = 0
     }
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setLayout()
+    override func addView() {
+        self.addSubViews(beerImage,descriptionLabel)
     }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    func setLayout(){
-        self.addSubview(beerImage)
-        self.addSubview(descriptionTextView)
+    override func setLayout(){
         
         beerImage.snp.makeConstraints { make in
             make.width.equalTo(120)
             make.height.equalTo(135)
-            make.top.equalTo(descriptionTextView)
+            make.top.equalTo(descriptionLabel)
             make.left.equalTo(21)
         }
-        descriptionTextView.snp.makeConstraints { make in
+        descriptionLabel.snp.makeConstraints { make in
             make.width.equalTo(232)
             make.height.equalTo(100)
             make.trailing.equalToSuperview()
             make.centerY.equalToSuperview()
+        }
+    }
+    func bind(model: Beer) {
+        DispatchQueue.main.async {
+            self.beerImage.kf.setImage(with: URL(string: model.imageUrl))
+            self.descriptionLabel.text = model.description
         }
     }
 }
