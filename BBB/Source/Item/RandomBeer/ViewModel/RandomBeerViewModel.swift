@@ -12,13 +12,13 @@ import UIKit
 final class RandomBeerViewModel{
     private let urlString = "https://api.punkapi.com/v2/beers/random"
     var beer: Dynamic<Beer?> = Dynamic(nil)
+    private let decoder = JSONDecoder()
     
     func fetchData() {
         AF.request(urlString).responseData { (response) in
             switch response.result {
             case .success(let res):
-                let decoder = JSONDecoder()
-                guard let json = try? decoder.decode([Beer].self, from: res).first else { return }
+                guard let json = try? self.decoder.decode([Beer].self, from: res).first else { return }
                 self.beer.value = json
                 print(json)
                 
