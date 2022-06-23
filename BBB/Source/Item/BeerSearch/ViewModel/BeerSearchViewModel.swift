@@ -13,7 +13,7 @@ final class BeerSearchViewModel{
     
     private let urlString = "https://api.punkapi.com/v2/beers"
     var beer: Dynamic<Beer?> = Dynamic(nil)
-    let decoder = JSONDecoder()
+    private let decoder = JSONDecoder()
     
     func fetchData(searchText: String) {
         AF.request(urlString+"/\(searchText)").responseData { (response) in
