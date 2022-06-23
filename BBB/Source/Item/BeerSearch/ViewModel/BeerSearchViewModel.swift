@@ -12,7 +12,6 @@ import UIKit
 final class BeerSearchViewModel{
     
     private let urlString = "https://api.punkapi.com/v2/beers"
-    var dataSource: Beer?
     var beer: Dynamic<Beer?> = Dynamic(nil)
     
     func fetchData(searchText: String) {
@@ -23,7 +22,6 @@ final class BeerSearchViewModel{
                 guard let json = try? decoder.decode([Beer].self, from: res).first else { return }
                 self.beer.value = json
                 print(json)
-                print(self.dataSource ?? "")
                 
             case .failure(let err):
                 print(err.localizedDescription)

@@ -11,7 +11,6 @@ import UIKit
 
 final class RandomBeerViewModel{
     private let urlString = "https://api.punkapi.com/v2/beers/random"
-    var dataSource: Beer?
     var beer: Dynamic<Beer?> = Dynamic(nil)
     
     func fetchData() {
@@ -22,7 +21,6 @@ final class RandomBeerViewModel{
                 guard let json = try? decoder.decode([Beer].self, from: res).first else { return }
                 self.beer.value = json
                 print(json)
-                print(self.dataSource ?? "")
                 
             case .failure(let err):
                 print(err.localizedDescription)
