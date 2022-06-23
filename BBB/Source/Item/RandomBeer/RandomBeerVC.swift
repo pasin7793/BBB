@@ -20,7 +20,7 @@ final class RandomBeerVC: BaseVC{
         $0.textAlignment = .center
     }
     
-    private let ResetButton = UIButton().then{
+    private let resetButton = UIButton().then{
         $0.layer.cornerRadius = 20
         $0.layer.backgroundColor = UIColor(red: 0.488, green: 0.631, blue: 1, alpha: 1).cgColor
         $0.setTitle("Reset", for: .normal)
@@ -41,10 +41,10 @@ final class RandomBeerVC: BaseVC{
         }
     }
     override func addView() {
-        view.addSubViews(beerImageView,idLabel,descriptionLabel,ResetButton)
+        view.addSubViews(beerImageView,idLabel,descriptionLabel,resetButton)
     }
     override func setUp() {
-        ResetButton.addTarget(self, action: #selector(ResetButtonDidTap), for: .touchUpInside)
+        resetButton.addTarget(self, action: #selector(ResetButtonDidTap), for: .touchUpInside)
     }
     override func setLayout() {
         beerImageView.snp.makeConstraints { make in
@@ -63,7 +63,7 @@ final class RandomBeerVC: BaseVC{
             make.width.equalTo(232)
             make.height.equalTo(81)
         }
-        ResetButton.snp.makeConstraints { make in
+        resetButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(descriptionLabel.snp.bottom).offset(150)
             make.width.equalTo(103)
