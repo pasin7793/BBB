@@ -9,13 +9,13 @@ import Kingfisher
 
 final class RandomBeerVC: BaseVC{
 
-    private let beerImage = UIImageView()
+    private let beerImageView = UIImageView()
     
     private let idLabel = UILabel().then{
         $0.textColor = .black
         $0.font = UIFont(name: "Helvetica", size: 12)
     }
-    private let descriptionTextView = UITextView().then{
+    private let descriptionLabel = UILabel().then{
         $0.font = UIFont(name: "Helvetica-bold", size: 16)
         $0.textAlignment = .center
     }
@@ -26,25 +26,28 @@ final class RandomBeerVC: BaseVC{
         $0.setTitle("Reset", for: .normal)
         $0.setTitleColor(.white, for: .normal)
     }
-    let urlString = "https://api.punkapi.com/v2/beers/random"
-    
-    var dataSource: Beer?
+    private let viewModel = RandomBeerViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        viewModel.beer.bind { [weak self] beer in
+            guard let beer = beer else {return}
+            DispatchQueue.main.async {
+                self?.beerImageView.kf.setImage(with: URL(string: beer.imageUrl))
+                self?.idLabel.text = "\(beer.id)"
+                self?.descriptionLabel.text = beer.description
+            }
+        }
     }
     override func addView() {
-        view.addSubview(beerImage)
-        view.addSubview(idLabel)
-        view.addSubview(descriptionTextView)
-        view.addSubview(ResetButton)
+        view.addSubViews(beerImageView,idLabel,descriptionLabel,ResetButton)
     }
     override func setUp() {
         ResetButton.addTarget(self, action: #selector(ResetButtonDidTap), for: .touchUpInside)
     }
     override func setLayout() {
-        beerImage.snp.makeConstraints { make in
+        beerImageView.snp.makeConstraints { make in
             make.width.equalTo(120)
             make.height.equalTo(135)
             make.centerX.equalToSuperview()
@@ -52,9 +55,9 @@ final class RandomBeerVC: BaseVC{
         }
         idLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(beerImage.snp.bottom).offset(5)
+            make.top.equalTo(beerImageView.snp.bottom).offset(5)
         }
-        descriptionTextView.snp.makeConstraints { make in
+        descriptionLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(idLabel).offset(71)
             make.width.equalTo(232)
@@ -62,37 +65,12 @@ final class RandomBeerVC: BaseVC{
         }
         ResetButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(descriptionTextView.snp.bottom).offset(150)
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(150)
             make.width.equalTo(103)
             make.height.equalTo(37)
         }
     }
-    func fetchData() {
-        AF.request(urlString).responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                //let re = response.result
-                //print(re)
-                do {
-                    let decoder = JSONDecoder()
-                    guard let json = try decoder.decode([Beer].self, from: response.data ?? .init()).first else { return }
-                    self.dataSource = json
-                    print(json)
-                     
-                    self.beerImage.kf.setImage(with: URL(string: json.imageUrl),placeholder: UIImage())
-                    self.idLabel.text = "\(self.dataSource?.id ?? 0)"
-                    self.descriptionTextView.text = self.dataSource?.description
-                    
-                } catch(let err) {
-                    print(err.localizedDescription)
-                }
-            case .failure(let err):
-                print(err.localizedDescription)
-            }
-        }
-    }
-    
     @objc func ResetButtonDidTap(sender: UIButton!){
-        fetchData()
+        viewModel.fetchData()
     }
 }
